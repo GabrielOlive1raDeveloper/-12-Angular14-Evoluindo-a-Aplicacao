@@ -1,7 +1,10 @@
-import { Pensamento } from './../pensamento';
+//Bibliotecas
 import { Component, OnInit } from '@angular/core';
-import { PensamentoService } from '../pensamento.service';
 import { Router } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+//Classes TS
+import { Pensamento } from './../pensamento';
+import { PensamentoService } from '../pensamento.service';
 
 @Component({
   selector: 'app-criar-pensamento',
@@ -17,12 +20,33 @@ export class CriarPensamentoComponent implements OnInit {
     modelo: ''
   }
 
+  formulario!: FormGroup
+
   constructor(
     private service: PensamentoService,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
     ) { }
 
   ngOnInit(): void {
+
+    //Primeira forma de criar um formulário reativo
+    this.formulario = this.formBuilder.group({
+      conteudo: ["Formulário reativo"],
+      autoria: [],
+      modelo: ["modelo1"]
+    })
+
+    /*Outra forma de criar um formulário reativo
+
+        this.formulario = new FormGroup({
+          conteudo: new FormControl(''),
+          autoria: new FormControl(''),
+          modelo: new FormControl('')
+        })
+
+    */
+
   }
 
   criarPensamento() {
