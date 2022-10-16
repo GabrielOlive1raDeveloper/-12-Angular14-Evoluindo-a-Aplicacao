@@ -13,13 +13,6 @@ import { PensamentoService } from '../pensamento.service';
 })
 export class CriarPensamentoComponent implements OnInit {
 
-  pensamento: Pensamento = {
-    id: 999,
-    conteudo: 'Aprendendo Angular',
-    autoria: 'Teste',
-    modelo: ''
-  }
-
   formulario!: FormGroup
 
   constructor(
@@ -33,7 +26,7 @@ export class CriarPensamentoComponent implements OnInit {
     //Primeira forma de criar um formulário reativo
     this.formulario = this.formBuilder.group({
       conteudo: ["Formulário reativo"],
-      autoria: [],
+      autoria: ["Angular"],
       modelo: ["modelo1"]
     })
 
@@ -50,7 +43,7 @@ export class CriarPensamentoComponent implements OnInit {
   }
 
   criarPensamento() {
-    this.service.criar(this.pensamento).subscribe(() => {
+    this.service.criar(this.formulario.value).subscribe(() => {
       this.router.navigate(['/listarPensamento'])
     });
   }
